@@ -1,10 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce/data/auth/model/sign_in_model.dart';
 import 'package:ecommerce/data/auth/model/user_creation_req.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class UserFirebaseServices {
   Future<Either> signup(UserCreationReqModel userModel);
+  Future<Either> getAges();
+  Future<Either> signin(UserSigninReqModel userModel);
 }
 
 class UserFirebaseServicesImple extends UserFirebaseServices {
@@ -39,6 +42,30 @@ class UserFirebaseServicesImple extends UserFirebaseServices {
         message = 'An account already exist in same email';
       }
       return Left(message);
+    }
+  }
+
+  @override
+  Future<Either> getAges() async {
+    try {
+      var returnedData =
+          await FirebaseFirestore.instance.collection('Ages').get();
+      return Right(returnedData.docs);
+    } on FirebaseException catch (e) {
+      return Left(e.message);
+    }
+  }
+
+  @override
+  Future<Either> signin(UserSigninReqModel userModel) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: userModel.email ?? '',
+        password: userModel.password ?? "",
+      );
+      return Right("Sign in was Successful");
+    } on FirebaseException catch (e) {
+      return Left(e.toString());
     }
   }
 }

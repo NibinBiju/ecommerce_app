@@ -1,7 +1,8 @@
-import 'package:ecommerce/common/helper/navigator.dart';
-import 'package:ecommerce/common/widgets/app_bar.dart';
-import 'package:ecommerce/core/config/theme/app_color.dart';
-import 'package:ecommerce/presentation/auth_page/sign_in.dart';
+import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
+import 'package:ecommerce/common/widgets/app_bar/app_bar.dart';
+import 'package:ecommerce/common/widgets/buttons/basic_app_button.dart';
+import 'package:ecommerce/data/auth/model/user_creation_req.dart';
+import 'package:ecommerce/presentation/auth_page/pages/gender_and_age_page.dart';
 import 'package:flutter/material.dart';
 
 class CreateNewAccountPage extends StatelessWidget {
@@ -53,7 +54,14 @@ class CreateNewAccountPage extends StatelessWidget {
                 onTap: () {
                   AppNavigator().push(
                     context: context,
-                    pagesToNavi: SignInPage(),
+                    pagesToNavi: GenderAndAgePage(
+                      userCreationReqModel: UserCreationReqModel(
+                        firstName: firstnameController.text.trim(),
+                        lastName: lastnameController.text.trim(),
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                      ),
+                    ),
                   );
                 },
               ),
@@ -79,34 +87,6 @@ class CreateNewAccountPage extends StatelessWidget {
     return Text(
       'Create New Account',
       style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({super.key, required this.buttonHint, this.onTap});
-
-  final String buttonHint;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(15),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(27),
-        ),
-        child: Center(
-          child: Text(
-            buttonHint,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
     );
   }
 }

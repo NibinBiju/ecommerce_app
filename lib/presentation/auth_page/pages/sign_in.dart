@@ -1,12 +1,14 @@
-import 'package:ecommerce/common/helper/navigator.dart';
-import 'package:ecommerce/core/config/theme/app_color.dart';
-import 'package:ecommerce/presentation/auth_page/create_account.dart';
-import 'package:ecommerce/presentation/auth_page/enter_password.dart';
+import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
+import 'package:ecommerce/common/widgets/buttons/basic_app_button.dart';
+import 'package:ecommerce/data/auth/model/sign_in_model.dart';
+import 'package:ecommerce/presentation/auth_page/pages/create_account.dart';
+import 'package:ecommerce/presentation/auth_page/pages/enter_password.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  SignInPage({super.key});
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class SignInPage extends StatelessWidget {
             SizedBox(height: 30),
             //text field
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter Email Address',
@@ -35,7 +38,14 @@ class SignInPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EnterPasswordPage()),
+                  MaterialPageRoute(
+                    builder:
+                        (context) => EnterPasswordPage(
+                          userSigninReqModel: UserSigninReqModel(
+                            email: _emailController.text.trim(),
+                          ),
+                        ),
+                  ),
                 );
               },
             ),
@@ -44,11 +54,10 @@ class SignInPage extends StatelessWidget {
             //create account text
             CreateOneCustomText(
               onTap: () {
-                 AppNavigator().push(
+                AppNavigator().push(
                   context: context,
                   pagesToNavi: CreateNewAccountPage(),
                 );
-                
               },
             ),
           ],
@@ -82,34 +91,6 @@ class CreateOneCustomText extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({super.key, required this.buttonHint, this.onTap});
-
-  final String buttonHint;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(15),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(27),
-        ),
-        child: Center(
-          child: Text(
-            buttonHint,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
       ),
     );
   }
