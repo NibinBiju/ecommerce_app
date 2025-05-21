@@ -22,8 +22,7 @@ class BasicReactiveButton extends StatelessWidget {
         if (state is ButtonStateLoading) {
           return _buttonLoading();
         }
-        if (state is ButtonStateSuccess) {}
-        if (state is ButtonStateFailed) {}
+
         return _initial();
       },
     );

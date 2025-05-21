@@ -8,6 +8,9 @@ abstract class UserFirebaseServices {
   Future<Either> signup(UserCreationReqModel userModel);
   Future<Either> getAges();
   Future<Either> signin(UserSigninReqModel userModel);
+  Future<Either> sendPasswordResetEmail(String email);
+  Future<bool> isLoggedIn();
+  Future<Either> getUser();
 }
 
 class UserFirebaseServicesImple extends UserFirebaseServices {
@@ -65,7 +68,43 @@ class UserFirebaseServicesImple extends UserFirebaseServices {
       );
       return Right("Sign in was Successful");
     } on FirebaseException catch (e) {
-      return Left(e.toString());
+      return Left(e.code);
+    }
+  }
+
+  @override
+  Future<Either> sendPasswordResetEmail(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return Right('Send Successfully');
+    } on FirebaseException catch (e) {
+      return Left('Please try');
+    }
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<Either> getUser() async {
+    try {
+      var currentUser = FirebaseAuth.instance.currentUser;
+      var returnedData = await FirebaseFirestore.instance
+          .collection("User")
+          .doc(currentUser?.uid)
+          .get()
+          .then((value) {
+            return value.data();
+          });
+      return Right(returnedData);
+    } on FirebaseException catch (e) {
+      return Left('Please Try Again');
     }
   }
 }

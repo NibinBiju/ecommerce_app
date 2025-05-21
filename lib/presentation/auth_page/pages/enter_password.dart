@@ -5,6 +5,7 @@ import 'package:ecommerce/common/widgets/buttons/basic_reactive_button.dart';
 import 'package:ecommerce/data/auth/model/sign_in_model.dart';
 import 'package:ecommerce/domain/auth/usecases/signin_usecase.dart';
 import 'package:ecommerce/presentation/auth_page/pages/forget_password.dart';
+import 'package:ecommerce/presentation/home_pages/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,9 +29,9 @@ class EnterPasswordPage extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(snackbar);
           }
           if (state is ButtonStateSuccess) {
-            AppNavigator().push(
+            AppNavigator().pushReplace(
               context: context,
-              pagesToNavi: ForgetPasswordPage(),
+              pagesToNavi: HomePage(),
             );
           }
         },

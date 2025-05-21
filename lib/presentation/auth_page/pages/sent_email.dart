@@ -22,8 +22,10 @@ class SentEmailPage extends StatelessWidget {
             SvgPicture.asset(AppVectors.emailSendImage),
             //text
             _sendMailForgetPasswordText(),
+            SizedBox(height: 20),
             //button
             CustomAuthButton(
+              margin: EdgeInsets.only(left: 40, right: 40),
               buttonHint: 'Return to Login',
               onTap: () {
                 AppNavigator().push(
