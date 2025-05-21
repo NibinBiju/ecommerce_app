@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/cubit/button_state_cubit.dart';
+import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
 import 'package:ecommerce/common/helper/bottom_sheet/app_bottom_sheet.dart';
 import 'package:ecommerce/common/widgets/app_bar/app_bar.dart';
 import 'package:ecommerce/common/widgets/buttons/basic_reactive_button.dart';
@@ -8,6 +9,7 @@ import 'package:ecommerce/domain/auth/usecases/signup.dart';
 import 'package:ecommerce/presentation/auth_page/bloc/cubit/age_selction_cubit.dart';
 import 'package:ecommerce/presentation/auth_page/bloc/cubit/ages_display_cubit.dart';
 import 'package:ecommerce/presentation/auth_page/bloc/cubit/gender_selection_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/pages/sign_in.dart';
 import 'package:ecommerce/presentation/auth_page/widgets/ages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +30,9 @@ class GenderAndAgePage extends StatelessWidget {
               behavior: SnackBarBehavior.floating,
             );
             ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          }
+          if (state is ButtonStateSuccess) {
+            AppNavigator().push(context: context, pagesToNavi: SignInPage());
           }
         },
         child: Column(
