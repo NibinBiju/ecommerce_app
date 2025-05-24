@@ -12,49 +12,44 @@ class CategoriesSection extends StatelessWidget {
       child: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesLoaded) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: List.generate(
-                  state.returnedData.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        CircleAvatar(radius: 32),
-                        Text(
-                          state.returnedData[index].title,
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ],
+            return SizedBox(
+              height: 200,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder:
+                    (context, index) => SizedBox(
+                      width: 60,
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            state.returnedData[index].title,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+                separatorBuilder:
+                    (context, index) =>
+                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                itemCount: state.returnedData.length,
               ),
             );
           }
           if (state is CategoriesLoading) {
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: List.generate(
-                  4,
-                  (index) => Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 32,
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
+            return CircularProgressIndicator();
           }
           return Container();
         },

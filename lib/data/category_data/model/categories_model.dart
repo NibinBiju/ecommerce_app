@@ -1,12 +1,12 @@
 import 'package:ecommerce/domain/categorys/entity/category_entity_model.dart';
 
 class CategoriesModel {
-  final String categoriesId;
+  final String categoryId;
   final String title;
   final String image;
 
   CategoriesModel({
-    required this.categoriesId,
+    required this.categoryId,
     required this.title,
     required this.image,
   });
@@ -14,7 +14,7 @@ class CategoriesModel {
   // From JSON
   factory CategoriesModel.fromJson(Map<String, dynamic> json) {
     return CategoriesModel(
-      categoriesId: json['categoriesId'] as String,
+      categoryId: json['categoryId'] as String,
       title: json['title'] as String,
       image: json['image'] ?? '',
     );
@@ -22,14 +22,14 @@ class CategoriesModel {
 
   // To JSON
   Map<String, dynamic> toJson() {
-    return {'categoriesId': categoriesId, 'title': title, 'image': image};
+    return {'categoryId': categoryId, 'title': title, 'image': image};
   }
 }
 
 extension CategoriesXModel on CategoriesModel {
   CategoriesModelEntity toEntity() {
     return CategoriesModelEntity(
-      categoriesId: categoriesId,
+      categoriesId: categoryId,
       title: title,
       image: image,
     );
