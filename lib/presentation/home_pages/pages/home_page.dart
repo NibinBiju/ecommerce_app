@@ -3,6 +3,7 @@ import 'package:ecommerce/core/config/assets/app_vectors.dart';
 import 'package:ecommerce/core/config/theme/app_color.dart';
 import 'package:ecommerce/domain/auth/entity/user_model_entity.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/user_info_display_cubit.dart';
+import 'package:ecommerce/presentation/home_pages/widgets/categories_section.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
           child: Column(
             children: [
               //profile section
@@ -45,10 +46,28 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 20),
               //search field
               SearchFieldWidget(searchTextController: _searchTextController),
+              SizedBox(height: 20),
+              //categories
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _headText('Categories'),
+                  Text('See All', style: TextStyle(fontSize: 16)),
+                ],
+              ),
+              SizedBox(height: 5),
+              CategoriesSection(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Text _headText(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
     );
   }
 

@@ -10,6 +10,7 @@ import 'package:ecommerce/domain/auth/usecases/send_email_forgetpassword_usecase
 import 'package:ecommerce/domain/auth/usecases/signin_usecase.dart';
 import 'package:ecommerce/domain/auth/usecases/signup.dart';
 import 'package:ecommerce/domain/categorys/repository/category_repo.dart';
+import 'package:ecommerce/domain/categorys/usecases/get_categories_usecases.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -17,6 +18,9 @@ final sl = GetIt.instance;
 Future<void> initializeDependecies() async {
   //srevices
   sl.registerSingleton<UserFirebaseServices>(UserFirebaseServicesImple());
+  sl.registerSingleton<CategoryFirebaseServices>(
+    CategoryFirebaseServicesImpl(),
+  );
 
   //repository
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
@@ -43,6 +47,6 @@ Future<void> initializeDependecies() async {
   //category repo
   sl.registerSingleton<CategoryRepository>(CategoryRepoImpl());
 
-  //category firebase
-  sl.registerSingleton<CategoryFirebaseServices>(CategoryFirebaseServicesImpl());
+  //Get categories usecases
+  sl.registerSingleton<GetCategoriesUsecases>(GetCategoriesUsecases());
 }
