@@ -13,7 +13,9 @@ class CategoryRepoImpl extends CategoryRepository {
         return Left(error);
       },
       (data) {
-        return Right(CategoriesModel.fromJson(data).toEntity());
+        return Right(
+          List.from(data).map((e) => CategoriesModel.fromJson(e).toEntity()),
+        );
       },
     );
   }
