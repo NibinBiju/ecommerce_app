@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/config/assets/app_vectors.dart';
 import 'package:ecommerce/domain/categorys/entity/category_entity_model.dart';
 import 'package:ecommerce/domain/categorys/usecases/get_categories_usecases.dart';
 import 'package:ecommerce/service_locater.dart';
@@ -8,6 +9,14 @@ part 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit() : super(CategoriesLoading());
+
+  List<String> categoriesImages = [
+    AppVectors.shoesImage,
+    AppVectors.accessoriesImage,
+    AppVectors.hoodiesImage,
+    AppVectors.shortsImage,
+    AppVectors.bagsImage,
+  ];
 
   void getCategories() async {
     var returnedData = await sl<GetCategoriesUsecases>().call();

@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/cubit/categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -12,13 +13,14 @@ class CategoriesSection extends StatelessWidget {
       child: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesLoaded) {
+            List images = context.read<CategoriesCubit>().categoriesImages;
             return SizedBox(
-              height: 200,
+              height: 90,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder:
                     (context, index) => SizedBox(
-                      width: 60,
+                      width: 80,
                       child: Column(
                         children: [
                           Container(
@@ -28,6 +30,7 @@ class CategoriesSection extends StatelessWidget {
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
+                            child: SvgPicture.asset(images[index]),
                           ),
                           SizedBox(height: 8),
                           Text(

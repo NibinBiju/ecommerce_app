@@ -1,7 +1,9 @@
+import 'package:ecommerce/common/helper/product_hori_list.dart';
 import 'package:ecommerce/core/config/assets/app_images.dart';
 import 'package:ecommerce/core/config/assets/app_vectors.dart';
 import 'package:ecommerce/core/config/theme/app_color.dart';
 import 'package:ecommerce/domain/auth/entity/user_model_entity.dart';
+import 'package:ecommerce/presentation/home_pages/cubit/products_cubit.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/user_info_display_cubit.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/categories_section.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/search_field.dart';
@@ -18,7 +20,7 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 5),
+          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
           child: Column(
             children: [
               //profile section
@@ -48,19 +50,50 @@ class HomePage extends StatelessWidget {
               SearchFieldWidget(searchTextController: _searchTextController),
               SizedBox(height: 20),
               //categories
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _headText('Categories'),
-                  Text('See All', style: TextStyle(fontSize: 16)),
-                ],
-              ),
+              headLineText('Categories'),
               SizedBox(height: 5),
+              //categories section
               CategoriesSection(),
+              SizedBox(height: 20),
+              //categories
+              headLineText('Top Selling'),
+              SizedBox(height: 8),
+              BlocProvider(
+                create: (context) => ProductsCubit()..getProducts(),
+                child: BlocBuilder<ProductsCubit, ProductsState>(
+                  builder: (context, state) {
+                    if (state is ProductsLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (state is ProductsLoaded) {
+                      return ProductHorizontalListWidget(
+                        productList: state.productModelEntity,
+                      );
+                    }
+                    if (state is ProductsFailed) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: Text(state.message),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Row headLineText(String headText) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _headText(headText),
+        Text('See All', style: TextStyle(fontSize: 16)),
+      ],
     );
   }
 
