@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductModelEntity {
   final String productId;
   final String title;
@@ -7,8 +9,11 @@ class ProductModelEntity {
   final String discription;
   final String shippingReturnDetails;
   final int productType;
+  final int salesNumber;
   final List color;
   final List size;
+  final Timestamp createdDate;
+
 
   ProductModelEntity({
     required this.productId,
@@ -21,5 +26,7 @@ class ProductModelEntity {
     required this.productType,
     required this.color,
     required this.size,
+    required this.salesNumber,
+    required this.createdDate,
   });
 }

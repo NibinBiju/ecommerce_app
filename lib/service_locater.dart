@@ -14,7 +14,8 @@ import 'package:ecommerce/domain/auth/usecases/signup.dart';
 import 'package:ecommerce/domain/categorys/repository/category_repo.dart';
 import 'package:ecommerce/domain/categorys/usecases/get_categories_usecases.dart';
 import 'package:ecommerce/domain/product/repository/product_repo.dart';
-import 'package:ecommerce/domain/product/usecases/getproducts_usecases.dart';
+import 'package:ecommerce/domain/product/usecases/get_new_inproducts.dart';
+import 'package:ecommerce/domain/product/usecases/get_topproducts_usecases.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -62,4 +63,7 @@ Future<void> initializeDependecies() async {
 
   //products usecases
   sl.registerSingleton<GetproductsUsecases>(GetproductsUsecases());
+
+  //new in products usecases
+  sl.registerSingleton<GetNewInProducts>(GetNewInProducts());
 }

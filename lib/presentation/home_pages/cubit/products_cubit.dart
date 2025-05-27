@@ -1,17 +1,17 @@
+import 'package:ecommerce/core/usecases/usecases.dart';
 import 'package:ecommerce/domain/product/entities/product_entities.dart';
-import 'package:ecommerce/domain/product/usecases/getproducts_usecases.dart';
-import 'package:ecommerce/service_locater.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit() : super(ProductsLoading());
+  final UseCase usecase;
+  ProductsCubit({required this.usecase}) : super(ProductsLoading());
 
   void getProducts() async {
     try {
-      var data = await sl<GetproductsUsecases>().call();
+      var data = await usecase.call();
       data.fold(
         (error) {
           emit(ProductsFailed(message: error));

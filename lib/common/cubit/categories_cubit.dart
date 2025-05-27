@@ -10,13 +10,7 @@ part 'categories_state.dart';
 class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit() : super(CategoriesLoading());
 
-  List<String> categoriesImages = [
-    AppVectors.shoesImage,
-    AppVectors.accessoriesImage,
-    AppVectors.hoodiesImage,
-    AppVectors.shortsImage,
-    AppVectors.bagsImage,
-  ];
+ 
 
   void getCategories() async {
     var returnedData = await sl<GetCategoriesUsecases>().call();

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/domain/product/entities/product_entities.dart';
 
 class ProductModel {
@@ -9,8 +10,10 @@ class ProductModel {
   final String discription;
   final String shippingReturnDetails;
   final int productType;
+  final int salesNumber;
   final List color;
   final List size;
+  final Timestamp createdDate;
 
   ProductModel({
     required this.productId,
@@ -23,6 +26,8 @@ class ProductModel {
     required this.productType,
     required this.color,
     required this.size,
+    required this.salesNumber,
+    required this.createdDate,
   });
 
   // From JSON
@@ -38,6 +43,8 @@ class ProductModel {
       productType: json['productType'] as int,
       color: json['color'] as List,
       size: json['size'] as List,
+      salesNumber: json['salesNumber'] as int,
+      createdDate: json['createdDate'] as Timestamp,
     );
   }
 
@@ -54,6 +61,8 @@ class ProductModel {
       'productType': productType,
       'size': size,
       'color': color,
+      'salesNumber': salesNumber,
+      'createdDate': createdDate,
     };
   }
 }
@@ -71,6 +80,8 @@ extension ProductXModel on ProductModel {
       productType: productType,
       color: color,
       size: size,
+      salesNumber: salesNumber,
+      createdDate: createdDate,
     );
   }
 }
