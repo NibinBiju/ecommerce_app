@@ -13,6 +13,7 @@ final class CategoriesLoaded extends CategoriesState {
     AppVectors.hoodiesImage,
     AppVectors.shortsImage,
     AppVectors.bagsImage,
+    AppVectors.bagsImage,
   ];
   CategoriesLoaded({required this.returnedData});
 }

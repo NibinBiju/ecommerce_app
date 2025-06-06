@@ -10,6 +10,7 @@ import 'package:ecommerce/domain/product/usecases/get_new_inproducts.dart';
 import 'package:ecommerce/domain/product/usecases/get_topproducts_usecases.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/products_cubit.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/user_info_display_cubit.dart';
+import 'package:ecommerce/presentation/home_pages/widgets/categories_list.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/categories_section.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/search_field.dart';
 import 'package:ecommerce/service_locater.dart';
@@ -65,7 +66,12 @@ class HomePage extends StatelessWidget {
                     searchTextController: _searchTextController,
                   ),
                   //categories
-
+                  headLineText(
+                    content: CategoriesVerticalList(),
+                    context: context,
+                    headText: 'Categories',
+                    seeAlloption: true,
+                  ),
                   //categories section
                   CategoriesSection(),
                   //categories
@@ -73,12 +79,14 @@ class HomePage extends StatelessWidget {
                     content: Container(),
                     context: context,
                     headText: 'Top Selling',
+                    seeAlloption: false,
                   ),
                   GetTopProducts(),
                   headLineText(
                     content: Container(),
                     context: context,
                     headText: 'New In',
+                    seeAlloption: false,
                   ),
                   GetNewProducts(),
                 ],
@@ -94,6 +102,7 @@ class HomePage extends StatelessWidget {
     required String headText,
     required BuildContext context,
     required Widget content,
+    required bool seeAlloption,
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +116,10 @@ class HomePage extends StatelessWidget {
                 pagesToNavi: SeeAllPage(content: content),
               );
             },
-            child: Text('See All', style: TextStyle(fontSize: 16)),
+            child:
+                seeAlloption
+                    ? Text('See All', style: TextStyle(fontSize: 16))
+                    : Container(),
           ),
         ),
       ],
@@ -158,17 +170,14 @@ class HomePage extends StatelessWidget {
 }
 
 class GetNewProducts extends StatelessWidget {
-  const GetNewProducts({
-    super.key,
-  });
+  const GetNewProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
           (context) =>
-              ProductsCubit(usecase: GetNewInProducts())
-                ..getProducts(),
+              ProductsCubit(usecase: GetNewInProducts())..getProducts(),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
@@ -180,10 +189,7 @@ class GetNewProducts extends StatelessWidget {
             );
           }
           if (state is ProductsFailed) {
-            return SizedBox(
-              width: double.infinity,
-              child: Text(state.message),
-            );
+            return SizedBox(width: double.infinity, child: Text(state.message));
           }
           return Container();
         },
@@ -193,17 +199,14 @@ class GetNewProducts extends StatelessWidget {
 }
 
 class GetTopProducts extends StatelessWidget {
-  const GetTopProducts({
-    super.key,
-  });
+  const GetTopProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create:
           (context) =>
-              ProductsCubit(usecase: sl<GetproductsUsecases>())
-                ..getProducts(),
+              ProductsCubit(usecase: sl<GetproductsUsecases>())..getProducts(),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
@@ -215,10 +218,7 @@ class GetTopProducts extends StatelessWidget {
             );
           }
           if (state is ProductsFailed) {
-            return SizedBox(
-              width: double.infinity,
-              child: Text(state.message),
-            );
+            return SizedBox(width: double.infinity, child: Text(state.message));
           }
           return Container();
         },

@@ -1,9 +1,9 @@
 import 'package:ecommerce/common/cubit/button_state_cubit.dart';
 import 'package:ecommerce/core/config/theme/app_theme.dart';
 import 'package:ecommerce/firebase_options.dart';
-import 'package:ecommerce/presentation/auth_page/bloc/cubit/age_selction_cubit.dart';
-import 'package:ecommerce/presentation/auth_page/bloc/cubit/ages_display_cubit.dart';
-import 'package:ecommerce/presentation/auth_page/bloc/cubit/gender_selection_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/cubit/age_selction_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/cubit/ages_display_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/cubit/gender_selection_cubit.dart';
 import 'package:ecommerce/presentation/splash/cubit/splash_cubit.dart';
 import 'package:ecommerce/presentation/splash/pages/splash_page.dart';
 import 'package:ecommerce/service_locater.dart';

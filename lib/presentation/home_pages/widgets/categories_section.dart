@@ -1,6 +1,4 @@
 import 'package:ecommerce/common/cubit/categories_cubit.dart';
-import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
-import 'package:ecommerce/common/helper/see_all_page/see_all_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,17 +13,7 @@ class CategoriesSection extends StatelessWidget {
         if (state is CategoriesLoaded) {
           return Column(
             children: [
-              headLineText(
-                content: ListView.builder(
-                  itemCount: state.returnedData.length,
-                  itemBuilder: (context, index) => Column(children: [
-
-                        ],
-                      ),
-                ),
-                context: context,
-                headText: 'Categories',
-              ),
+             
               SizedBox(
                 height: 90,
                 child: ListView.separated(
@@ -78,33 +66,3 @@ class CategoriesSection extends StatelessWidget {
   }
 }
 
-Row headLineText({
-  required String headText,
-  required BuildContext context,
-  required Widget content,
-}) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      _headText(headText),
-      InkWell(
-        child: TextButton(
-          onPressed: () {
-            AppNavigator().push(
-              context: context,
-              pagesToNavi: SeeAllPage(content: content),
-            );
-          },
-          child: Text('See All', style: TextStyle(fontSize: 16)),
-        ),
-      ),
-    ],
-  );
-}
-
-Text _headText(String text) {
-  return Text(
-    text,
-    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-  );
-}

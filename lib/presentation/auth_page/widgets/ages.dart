@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce/presentation/auth_page/bloc/cubit/age_selction_cubit.dart';
-import 'package:ecommerce/presentation/auth_page/bloc/cubit/ages_display_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/cubit/age_selction_cubit.dart';
+import 'package:ecommerce/presentation/auth_page/cubit/ages_display_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
