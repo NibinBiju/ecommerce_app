@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModelEntity {
   final String productId;
+  final String categoryId;
   final String title;
   final String image;
   final String price;
@@ -14,9 +15,9 @@ class ProductModelEntity {
   final List size;
   final Timestamp createdDate;
 
-
   ProductModelEntity({
     required this.productId,
+    required this.categoryId,
     required this.title,
     required this.image,
     required this.price,

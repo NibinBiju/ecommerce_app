@@ -1,5 +1,8 @@
 import 'package:ecommerce/common/cubit/categories_cubit.dart';
+import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
+import 'package:ecommerce/common/helper/see_all_page/see_all_page.dart';
 import 'package:ecommerce/core/config/theme/app_color.dart';
+import 'package:ecommerce/presentation/home_pages/widgets/products_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +21,7 @@ class CategoriesVerticalList extends StatelessWidget {
           }
           if (state is CategoriesLoaded) {
             return Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,29 +30,44 @@ class CategoriesVerticalList extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: state.returnedData.length,
                       itemBuilder:
-                          (context, index) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            margin: EdgeInsets.only(top: 8, bottom: 8),
-                            height: 80,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: AppColors.secondBackground,
-                            ),
-                            child: Row(
-                              spacing: 12,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
-                                  radius: 27,
-                                  backgroundColor: Colors.white,
-                                  child: SvgPicture.asset(
-                                    state.categoriesImages[index],
+                          (context, index) => InkWell(
+                            onTap: () {
+                              AppNavigator().push(
+                                context: context,
+                                pagesToNavi: SeeAllPage(
+                                  content: ProductsCategoriesList(
+                                    categoryId:
+                                        state.returnedData[index].categoriesId,
+                                    categoryName:
+                                        state.returnedData[index].title,
                                   ),
                                 ),
-                                _normalText(state.returnedData[index].title),
-                              ],
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              margin: EdgeInsets.only(top: 8, bottom: 8),
+                              height: 80,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: AppColors.secondBackground,
+                              ),
+                              child: Row(
+                                spacing: 12,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 27,
+                                    backgroundColor: Colors.white,
+                                    child: SvgPicture.asset(
+                                      state.categoriesImages[index],
+                                    ),
+                                  ),
+                                  _normalText(state.returnedData[index].title),
+                                ],
+                              ),
                             ),
                           ),
                     ),

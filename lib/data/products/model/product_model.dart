@@ -3,6 +3,7 @@ import 'package:ecommerce/domain/product/entities/product_entities.dart';
 
 class ProductModel {
   final String productId;
+  final String categoryId;
   final String title;
   final String image;
   final String price;
@@ -16,6 +17,7 @@ class ProductModel {
   final Timestamp createdDate;
 
   ProductModel({
+    required this.categoryId,
     required this.productId,
     required this.title,
     required this.image,
@@ -34,6 +36,7 @@ class ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       productId: json['productId'] as String,
+      categoryId: json['categoryId'] as String,
       title: json['title'] as String,
       image: json['image'] ?? '',
       price: json['price'] as String,
@@ -52,6 +55,7 @@ class ProductModel {
   Map<String, dynamic> toJson() {
     return {
       'productId': productId,
+      'categoryId': categoryId,
       'title': title,
       'image': image,
       'price': price,
@@ -71,6 +75,7 @@ extension ProductXModel on ProductModel {
   ProductModelEntity toEntity() {
     return ProductModelEntity(
       productId: productId,
+      categoryId: categoryId,
       title: title,
       image: image,
       price: price,
