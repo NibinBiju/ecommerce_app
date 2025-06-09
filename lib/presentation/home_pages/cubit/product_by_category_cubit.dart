@@ -1,5 +1,5 @@
 import 'package:ecommerce/domain/product/entities/product_entities.dart';
-import 'package:ecommerce/domain/products_by_categories/usecases/products_categ_usecase.dart';
+import 'package:ecommerce/domain/product/usecases/products_categ_usecase.dart';
 import 'package:ecommerce/service_locater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

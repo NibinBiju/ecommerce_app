@@ -1,3 +1,5 @@
+import 'package:ecommerce/common/helper/product_card/product_card.dart';
+import 'package:ecommerce/domain/product/entities/product_entities.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/product_by_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,7 +56,7 @@ class ProductsCategoriesList extends StatelessWidget {
     );
   }
 
-  GridView _gridProductList({required List products}) {
+  GridView _gridProductList({required List<ProductModelEntity> products}) {
     return GridView.builder(
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,8 +66,7 @@ class ProductsCategoriesList extends StatelessWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder:
-          (context, index) =>
-              Container(decoration: BoxDecoration(color: Colors.white)),
+          (context, index) => ProductCard(productList: products, index: index),
     );
   }
 }

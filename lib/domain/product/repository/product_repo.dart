@@ -3,4 +3,5 @@ import 'package:dartz/dartz.dart';
 abstract class ProductRepository {
   Future<Either> getTopSelling();
   Future<Either> getNewInSelling();
+  Future<Either> getProductsByCategory({required String categoryId});
 }

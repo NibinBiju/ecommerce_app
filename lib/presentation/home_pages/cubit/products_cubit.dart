@@ -2,7 +2,6 @@ import 'package:ecommerce/core/usecases/usecases.dart';
 import 'package:ecommerce/domain/product/entities/product_entities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {

@@ -38,4 +38,22 @@ class ProductRepositoryImpl implements ProductRepository {
       },
     );
   }
+
+  @override
+  Future<Either> getProductsByCategory({required String categoryId}) async {
+    var data = await sl<ProductsFirebaseServices>()
+        .getProductsByCategory(categoryId: categoryId);
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        return Right(
+          List.from(
+            data,
+          ).map((e) => ProductModel.fromJson(e).toEntity()).toList(),
+        );
+      },
+    );
+  }
 }

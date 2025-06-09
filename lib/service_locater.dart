@@ -2,8 +2,6 @@ import 'package:ecommerce/data/auth/repository/user_creation_impl.dart';
 import 'package:ecommerce/data/auth/source/user_firebase_services.dart';
 import 'package:ecommerce/data/category_data/repository_impl/category_repo_impl.dart';
 import 'package:ecommerce/data/category_data/source/category_firebase_services.dart';
-import 'package:ecommerce/data/product_categ/repository/product_cate_repo_impl.dart';
-import 'package:ecommerce/data/product_categ/source/pro_by_cate_firebase_service.dart';
 import 'package:ecommerce/data/products/repository_impl/product_impl_repo.dart';
 import 'package:ecommerce/data/products/source/products_firebase_services.dart';
 import 'package:ecommerce/domain/auth/repository/auth.dart';
@@ -18,8 +16,7 @@ import 'package:ecommerce/domain/categorys/usecases/get_categories_usecases.dart
 import 'package:ecommerce/domain/product/repository/product_repo.dart';
 import 'package:ecommerce/domain/product/usecases/get_new_inproducts.dart';
 import 'package:ecommerce/domain/product/usecases/get_topproducts_usecases.dart';
-import 'package:ecommerce/domain/products_by_categories/repository/products_category_repo.dart';
-import 'package:ecommerce/domain/products_by_categories/usecases/products_categ_usecase.dart';
+import 'package:ecommerce/domain/product/usecases/products_categ_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -32,9 +29,6 @@ Future<void> initializeDependecies() async {
   );
   sl.registerSingleton<ProductsFirebaseServices>(
     ProductsFirebaseServicesImpl(),
-  );
-  sl.registerSingleton<ProductByCategoryFirebaseService>(
-    ProByCateFirebaseServiceImpl(),
   );
 
   //repository
@@ -74,9 +68,8 @@ Future<void> initializeDependecies() async {
   //new in products usecases
   sl.registerSingleton<GetNewInProducts>(GetNewInProducts());
 
-  //product by category
-  sl.registerSingleton<ProductsCategoryRepo>(ProductCateRepoImpl());
-
   //Products Category Usecase
   sl.registerSingleton<ProductsCategUsecase>(ProductsCategUsecase());
+
+  
 }

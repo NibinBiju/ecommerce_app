@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/cubit/categories_cubit.dart';
 import 'package:ecommerce/common/helper/app_navigator/navigator.dart';
 import 'package:ecommerce/common/helper/products/product_hori_list.dart';
+import 'package:ecommerce/common/helper/search_page/search_page.dart';
 import 'package:ecommerce/common/helper/see_all_page/see_all_page.dart';
 import 'package:ecommerce/core/config/assets/app_images.dart';
 import 'package:ecommerce/core/config/assets/app_vectors.dart';
@@ -8,11 +9,11 @@ import 'package:ecommerce/core/config/theme/app_color.dart';
 import 'package:ecommerce/domain/auth/entity/user_model_entity.dart';
 import 'package:ecommerce/domain/product/usecases/get_new_inproducts.dart';
 import 'package:ecommerce/domain/product/usecases/get_topproducts_usecases.dart';
+import 'package:ecommerce/presentation/categories/pages/categories_page.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/products_cubit.dart';
 import 'package:ecommerce/presentation/home_pages/cubit/user_info_display_cubit.dart';
-import 'package:ecommerce/presentation/home_pages/widgets/categories_list.dart';
 import 'package:ecommerce/presentation/home_pages/widgets/categories_section.dart';
-import 'package:ecommerce/presentation/home_pages/widgets/search_field.dart';
+import 'package:ecommerce/common/helper/search_field/search_field.dart';
 import 'package:ecommerce/service_locater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,6 +65,13 @@ class HomePage extends StatelessWidget {
                   //search field
                   SearchFieldWidget(
                     searchTextController: _searchTextController,
+                    readOnly: true,
+                    onTap: () {
+                      AppNavigator().push(
+                        context: context,
+                        pagesToNavi: SearchPage(content: Container()),
+                      );
+                    },
                   ),
                   //categories
                   headLineText(

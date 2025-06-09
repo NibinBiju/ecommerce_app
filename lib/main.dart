@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ButtonStateCubit()),
       ],
       child: MaterialApp(
+        
         debugShowCheckedModeBanner: false,
         theme: AppTheme.appTheme,
         home: SplashPage(),

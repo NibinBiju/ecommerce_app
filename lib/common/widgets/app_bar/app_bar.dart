@@ -31,6 +31,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   onTap: () {
                     Navigator.pop(context);
                   },

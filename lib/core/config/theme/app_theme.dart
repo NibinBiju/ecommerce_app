@@ -6,6 +6,8 @@ class AppTheme {
 
 
   static final appTheme = ThemeData(
+    splashColor: Colors.transparent,
+    
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
     brightness: Brightness.dark,

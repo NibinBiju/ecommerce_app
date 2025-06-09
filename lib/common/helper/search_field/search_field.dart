@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchFieldWidget extends StatelessWidget {
-  const SearchFieldWidget({super.key, required this.searchTextController});
+  const SearchFieldWidget({
+    super.key,
+    required this.searchTextController,
+    this.readOnly = false,
+    this.onTap,
+  });
   final TextEditingController searchTextController;
+  final bool readOnly;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: readOnly,
+      onTap: onTap,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
